@@ -20,20 +20,29 @@
 
 
 <script>
-
+    var clicou = 0
     function carregarDiv() {
 
         let div = document.getElementById("teste")
 
         div.innerHTML = `<h1>Guinness</h1>`
+        clicou++
+        if (clicou > 1) {
+            excluirDIv()
+        }
 
     }
-
+    function excluirDIv() {
+        let div = document.getElementById("teste")
+        div.innerHTML = ``
+    }
 
 
     let botao = document.getElementById("botaoCarregar")
 
     botao.addEventListener("click", carregarDiv)
+    // inicialmente eu só fiz uma nova fnnção pra excluir e depois chamei ela, mas vi que não dá certo
+    // vou tentar fazer uma variável que incrementa ao clicar, e se ela for maior que 1 ela executa a função de excluir  
 
 </script>
 
