@@ -6,6 +6,13 @@
 
     <meta charset="UTF-8">
 
+    <style>
+        #teste {
+            opacity: 1;
+            transition: opacity 1s;
+        }
+    </style>
+
 </head>
 
 
@@ -27,8 +34,12 @@
 
         div.innerHTML = `<h1>Guinness</h1>`
         clicou++
-        if (clicou > 1) {
-            excluirDIv()
+        // agora fiz uma verificação se a variável é impar ou par, isso faz com que eu tenha a opção de "ligar e desligar" a div
+        if (clicou % 2 == 0) {
+            div.style.opacity = 0
+        }
+        else {
+            div.style.opacity = 1
         }
 
     }
@@ -41,8 +52,6 @@
     let botao = document.getElementById("botaoCarregar")
 
     botao.addEventListener("click", carregarDiv)
-    // inicialmente eu só fiz uma nova fnnção pra excluir e depois chamei ela, mas vi que não dá certo
-    // vou tentar fazer uma variável que incrementa ao clicar, e se ela for maior que 1 ela executa a função de excluir  
 
 </script>
 
