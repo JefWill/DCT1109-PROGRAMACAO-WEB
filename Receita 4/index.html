@@ -25,6 +25,7 @@
     <div id="botoes">
         <button id="botaoOrdenar">Ordenar</button>
         <button id="botaoOrdenarDec">Ordenar Decrescente</button>
+        <button id="botaoEmbaralhar">Embaralhar</button>
     </div>
 </body>
 
@@ -44,6 +45,10 @@
         carregarDiv()
     }
 
+    function embaralhar() {
+        cervejas.sort(() => Math.random() - 0.5)
+        carregarDiv()
+    }
 
     function transformar(item) {
 
@@ -70,9 +75,11 @@
     let botao = document.getElementById("botaoCarregar")
     let botaoOrdenar = document.getElementById("botaoOrdenar")
     let botaoOrdenarDec = document.getElementById("botaoOrdenarDec")
+    let botaoEmbaralhar = document.getElementById("botaoEmbaralhar")
     botao.addEventListener("click", carregarDiv)
     botaoOrdenar.addEventListener("click", ordenar)
     botaoOrdenarDec.addEventListener("click", ordenarDec)
+    botaoEmbaralhar.addEventListener("click", embaralhar)
 
 </script>
 
