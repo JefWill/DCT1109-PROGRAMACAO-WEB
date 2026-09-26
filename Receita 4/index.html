@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+</head>
+<style>
+    #cervejas {
+        font-size: 30px;
+        color: blueviolet;
+        font-weight: bold;
+        font-family: 'Comic Sans MS', sans-serif;
+    }
+</style>
+
+
+<body>
+
+    <div id="meu amor">
+        <button id="botaoCarregar">Carregando cervejas...</button>
+    </div>
+    <div id="botoes">
+        <button id="botaoOrdenar">Ordenar</button>
+        <button id="botaoOrdenarDec">Ordenar Decrescente</button>
+        <button id="botaoEmbaralhar">Embaralhar</button>
+    </div>
+</body>
+
+
+
+<script>
+
+    let cervejas = ["Guiness", "Desperados", "Becks"]
+
+    function ordenar() {
+        cervejas.sort()
+        carregarDiv()
+    }
+
+    function ordenarDec() {
+        cervejas.sort().reverse()
+        carregarDiv()
+    }
+
+    function embaralhar() {
+        cervejas.sort(() => Math.random() - 0.5)
+        carregarDiv()
+    }
+
+    function transformar(item) {
+
+        return `<tr><td>${item}</td></tr>`
+
+    }
+
+
+
+    function carregarDiv() {
+
+        let div = document.getElementById("meu amor")
+
+        //let cervejasHtml = [`<h1>${cervejas[0]}</h1>`,`<h1>${cervejas[1]}</h1>`, `<h1>${cervejas[2]}</h1>`] 
+
+        let cervejasHtml = cervejas.map(transformar)
+
+        div.innerHTML = `<table id="cervejas">${cervejasHtml.join("\n")}</table>`
+
+    }
+
+
+
+    let botao = document.getElementById("botaoCarregar")
+    let botaoOrdenar = document.getElementById("botaoOrdenar")
+    let botaoOrdenarDec = document.getElementById("botaoOrdenarDec")
+    let botaoEmbaralhar = document.getElementById("botaoEmbaralhar")
+    botao.addEventListener("click", carregarDiv)
+    botaoOrdenar.addEventListener("click", ordenar)
+    botaoOrdenarDec.addEventListener("click", ordenarDec)
+    botaoEmbaralhar.addEventListener("click", embaralhar)
+
+</script>
+
+</html>
