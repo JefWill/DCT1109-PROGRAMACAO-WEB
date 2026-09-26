@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+</head>
+
+
+
+<body>
+
+    <div><button id="botaoCarregar">Carregando cervejas...</button></div>
+
+    <div id="meu amor"></div>
+
+</body>
+
+
+
+<script>
+
+    let cervs = ["Guiness", "Desperados", "Becks"]
+
+
+
+    //function carregar(){      
+
+    const carregarDiv = (array) => {
+
+        const div = document.getElementById("meu amor")
+
+        const htmlArray = array.map(item => `<h1>${item}</h1>`)
+
+        div.innerHTML = `${htmlArray.join("\n")}`
+
+    }
+
+
+
+    let botao = document.getElementById("botaoCarregar")
+
+    botao.addEventListener("click", () => carregarDiv(cervs))
+
+</script>
+
+</html>
