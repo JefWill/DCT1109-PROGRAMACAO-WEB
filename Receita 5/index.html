@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Receita 5</title>
+</head>
+
+<body>
+
+    <div>
+        <a href="#" id="linkCarregar">Carregar filmes...</a> |
+        <a href="#" id="linkOrdenar">Ordenar</a> |
+        <a href="#" id="linkOrdenarDec">Ordenar Decrescente</a> |
+        <a href="#" id="linkEmbaralhar">Embaralhar</a>
+    </div>
+
+    <div id="meu amor"></div>
+
+</body>
+
+<script>
+    const filmes = ["Matrix", "Inception", "Interstellar", "Avatar"];
+
+    // Exercício 1: carregarDiv recebendo o array como parâmetro (em Arrow Function)
+    const carregarDiv = (array) => {
+        const div = document.getElementById("meu amor");
+        const htmlArray = array.map(item => `<h1>${item}</h1>`);
+        div.innerHTML = `${htmlArray.join("\n")}`;
+    };
+
+    // Exercício 2: Funções da Receita 4 em Arrow Functions
+    const ordenar = () => {
+        filmes.sort();
+        carregarDiv(filmes);
+    };
+
+    const ordenarDec = () => {
+        filmes.sort().reverse();
+        carregarDiv(filmes);
+    };
+
+    const embaralhar = () => {
+        filmes.sort(() => Math.random() - 0.5);
+        carregarDiv(filmes);
+    };
+
+    // Exercício 3: Links chamando os métodos
+    const linkCarregar = document.getElementById("linkCarregar");
+    const linkOrdenar = document.getElementById("linkOrdenar");
+    const linkOrdenarDec = document.getElementById("linkOrdenarDec");
+    const linkEmbaralhar = document.getElementById("linkEmbaralhar");
+
+    linkCarregar.addEventListener("click", () => carregarDiv(filmes));
+    linkOrdenar.addEventListener("click", () => ordenar());
+    linkOrdenarDec.addEventListener("click", () => ordenarDec());
+    linkEmbaralhar.addEventListener("click", () => embaralhar());
+</script>
+
+</html>
