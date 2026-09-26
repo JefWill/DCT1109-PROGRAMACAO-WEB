@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <style>
+        #teste {
+            opacity: 1;
+            transition: opacity 1s;
+        }
+    </style>
+
+</head>
+
+
+
+<body>
+
+    <div id="meu amor"><button id="botaoCarregar">Carregando cervejas...</button></div>
+    <div id="teste"></div>
+
+</body>
+
+
+
+<script>
+    var clicou = 0
+    function carregarDiv() {
+
+        let div = document.getElementById("teste")
+
+        div.innerHTML = `<h1>Guinness</h1>`
+        clicou++
+        // agora fiz uma verificação se a variável é impar ou par, isso faz com que eu tenha a opção de "ligar e desligar" a div
+        if (clicou % 2 == 0) {
+            div.style.opacity = 0
+        }
+        else {
+            div.style.opacity = 1
+        }
+
+    }
+    function excluirDIv() {
+        let div = document.getElementById("teste")
+        div.innerHTML = ``
+    }
+
+
+    let botao = document.getElementById("botaoCarregar")
+
+    botao.addEventListener("click", carregarDiv)
+
+</script>
+
+</html>
