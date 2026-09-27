@@ -47,7 +47,32 @@
 <script>
 
 
-
+    let teste = [
+        {
+            chave1: "valor1",
+            chave2: "valor2",
+            chave3: "valor3",
+            chave4: "valor4"
+        },
+        {
+            chave1: "valor1",
+            chave2: "valor2",
+            chave3: "valor3",
+            chave4: "valor4"
+        },
+        {
+            chave1: "valor1",
+            chave2: "valor2",
+            chave3: "valor3",
+            chave4: "valor4"
+        },
+        {
+            chave1: "valor1",
+            chave2: "valor2",
+            chave3: "valor3",
+            chave4: "valor4"
+        }
+    ]
     let cervejas = [
 
         {
@@ -92,24 +117,26 @@
 
     //cs é um array de cervejas
 
-    const carregarDiv = cs => {
+    const carregarDiv = (cs, id = "cervejasDiv") => {
 
-        const div = document.getElementById("cervejasDiv")
+        const div = document.getElementById(id)
+        const itensHtml = cs.map(cs => {
+            const valores = Object.values(cs) //modifiquei a função pra que ficasse 100% generica
 
-        const itensHtml = cs.map(item => `<tr>
-                                            <td>${item['name']}</td>
-                                            <td>${item['alcohol']}</td>
-                                            <td>${item['ibu']}</td>
-                                            <td>${item['style']}</td>
-                                            </tr>`)
-
+            return `<tr>
+                                            <td>${valores[0]}</td>
+                                            <td>${valores[1]}</td>
+                                            <td>${valores[2]}</td>
+                                            <td>${valores[3]}</td>
+                                            </tr>`})
+        const chaves = Object.keys(cs[0])
         div.innerHTML = `<table>
                          <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th>Alcohol</th>
-                                <th>IBU</th>
-                                <th>Estilo</th>
+                                <th>${chaves[0]}</th>
+                                <th>${chaves[1]}</th>
+                                <th>${chaves[2]}</th>
+                                <th>${chaves[3]}</th>
                             </tr>
                         </thead>
                         <tbody>
