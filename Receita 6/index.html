@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <style>
+        table,
+        th,
+        td {
+            font-family: 'comic sans ms';
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        table {
+            border-radius: 5px;
+            border-spacing: 10px;
+
+        }
+
+        thead {
+            background-color: #333;
+            color: #fff;
+        }
+
+        th {
+            text-align: left;
+        }
+    </style>
+</head>
+
+
+
+<body>
+
+    <div><button id="botaoCarregar">Carregando cervejas...</button></div>
+
+    <div id="cervejasDiv"></div>
+
+</body>
+
+
+
+<script>
+
+
+    let jogos = [
+        {
+            titulo: "The Witcher 3",
+            genero: "RPG",
+            ano: "2015",
+            nota: "9.8"
+        },
+        {
+            titulo: "Chrono Trigger",
+            genero: "JRPG",
+            ano: "1995",
+            nota: "10.0"
+        },
+        {
+            titulo: "Elden Ring",
+            genero: "Souls-like",
+            ano: "2022",
+            nota: "9.6"
+        },
+        {
+            titulo: "Red Dead Redemption 2",
+            genero: "Ação/Aventura",
+            ano: "2018",
+            nota: "9.9"
+        }
+    ]
+
+    let cervejas = [
+
+        {
+
+            name: "Guiness",
+
+            alcohol: "10%",
+
+            ibu: "30",
+
+            style: "Red Ale"
+
+        },
+
+        {
+
+            name: "Desperados",
+
+            alcohol: "6%",
+
+            ibu: "40",
+
+            style: "IPA"
+
+        },
+
+        {
+
+            name: "Becks",
+
+            alcohol: "5%",
+
+            ibu: "30",
+
+            style: "Pilsen"
+
+        }
+
+    ]
+
+
+
+    //cs é um array de cervejas
+
+    const carregarDiv = (
+        cs,
+        id = "cervejasDiv",
+        headers = ["Nome", "Álcool", "Estilo", "Amargor"],
+        props = ["name", "alcohol", "style", "ibu"]
+    ) => {
+
+        const div = document.getElementById(id)
+
+        const itensHtml = cs.map(item => `<tr>
+            ${props.map(prop => `<td>${item[prop]}</td>`).join("")}
+        </tr>`)
+
+        div.innerHTML = `<table>
+                         <thead>
+                            <tr>
+                                ${headers.map(header => `<th>${header}</th>`).join("")}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${itensHtml.join("\n")}
+                        </tbody>
+                        </table>`
+
+    }
+
+
+
+    let botao = document.getElementById("botaoCarregar")
+
+    botao.addEventListener("click", () => carregarDiv(jogos, "cervejasDiv", ["Título", "Gênero", "Ano", "Nota"], ["titulo", "genero", "ano", "nota"]))
+
+
+
+</script>
+
+</html>
