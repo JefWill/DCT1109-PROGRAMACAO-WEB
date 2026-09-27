@@ -54,7 +54,11 @@
 
             name: "Guiness",
 
-            alcohol: "10%"
+            alcohol: "10%",
+
+            ibu: "30",
+
+            style: "Red Ale"
 
         },
 
@@ -62,7 +66,11 @@
 
             name: "Desperados",
 
-            alcohol: "6%"
+            alcohol: "6%",
+
+            ibu: "40",
+
+            style: "IPA"
 
         },
 
@@ -70,7 +78,11 @@
 
             name: "Becks",
 
-            alcohol: "5%"
+            alcohol: "5%",
+
+            ibu: "30",
+
+            style: "Pilsen"
 
         }
 
@@ -87,6 +99,8 @@
         const itensHtml = cs.map(item => `<tr>
                                             <td>${item['name']}</td>
                                             <td>${item['alcohol']}</td>
+                                            <td>${item['ibu']}</td>
+                                            <td>${item['style']}</td>
                                             </tr>`)
 
         div.innerHTML = `<table>
@@ -94,6 +108,8 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Alcohol</th>
+                                <th>IBU</th>
+                                <th>Estilo</th>
                             </tr>
                         </thead>
                         <tbody>
