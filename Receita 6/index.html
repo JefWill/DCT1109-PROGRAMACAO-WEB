@@ -47,32 +47,33 @@
 <script>
 
 
-    let teste = [
+    let jogos = [
         {
-            chave1: "valor1",
-            chave2: "valor2",
-            chave3: "valor3",
-            chave4: "valor4"
+            titulo: "The Witcher 3",
+            genero: "RPG",
+            ano: "2015",
+            nota: "9.8"
         },
         {
-            chave1: "valor1",
-            chave2: "valor2",
-            chave3: "valor3",
-            chave4: "valor4"
+            titulo: "Chrono Trigger",
+            genero: "JRPG",
+            ano: "1995",
+            nota: "10.0"
         },
         {
-            chave1: "valor1",
-            chave2: "valor2",
-            chave3: "valor3",
-            chave4: "valor4"
+            titulo: "Elden Ring",
+            genero: "Souls-like",
+            ano: "2022",
+            nota: "9.6"
         },
         {
-            chave1: "valor1",
-            chave2: "valor2",
-            chave3: "valor3",
-            chave4: "valor4"
+            titulo: "Red Dead Redemption 2",
+            genero: "Ação/Aventura",
+            ano: "2018",
+            nota: "9.9"
         }
     ]
+
     let cervejas = [
 
         {
@@ -117,26 +118,23 @@
 
     //cs é um array de cervejas
 
-    const carregarDiv = (cs, id = "cervejasDiv") => {
+    const carregarDiv = (
+        cs,
+        id = "cervejasDiv",
+        headers = ["Nome", "Álcool", "Estilo", "Amargor"],
+        props = ["name", "alcohol", "style", "ibu"]
+    ) => {
 
         const div = document.getElementById(id)
-        const itensHtml = cs.map(cs => {
-            const valores = Object.values(cs) //modifiquei a função pra que ficasse 100% generica
 
-            return `<tr>
-                                            <td>${valores[0]}</td>
-                                            <td>${valores[1]}</td>
-                                            <td>${valores[2]}</td>
-                                            <td>${valores[3]}</td>
-                                            </tr>`})
-        const chaves = Object.keys(cs[0])
+        const itensHtml = cs.map(item => `<tr>
+            ${props.map(prop => `<td>${item[prop]}</td>`).join("")}
+        </tr>`)
+
         div.innerHTML = `<table>
                          <thead>
                             <tr>
-                                <th>${chaves[0]}</th>
-                                <th>${chaves[1]}</th>
-                                <th>${chaves[2]}</th>
-                                <th>${chaves[3]}</th>
+                                ${headers.map(header => `<th>${header}</th>`).join("")}
                             </tr>
                         </thead>
                         <tbody>
@@ -150,7 +148,7 @@
 
     let botao = document.getElementById("botaoCarregar")
 
-    botao.addEventListener("click", () => carregarDiv(cervejas))
+    botao.addEventListener("click", () => carregarDiv(jogos, "cervejasDiv", ["Título", "Gênero", "Ano", "Nota"], ["titulo", "genero", "ano", "nota"]))
 
 
 
