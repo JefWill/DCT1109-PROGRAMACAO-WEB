@@ -3,22 +3,67 @@
 
 <head>
     <meta charset="UTF-8">
+    <style>
+        table,
+        th,
+        td {
+            font-family: 'comic sans ms', sans-serif;
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+
+        table {
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        thead {
+            background-color: #333;
+            color: #fff;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        button {
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
     <div><button id="botaoCarregar">Carregando cervejas...</button></div>
     <div id="cervejasDiv"></div>
+    <p>nota: no exercicio 2 eu peguei o estilo que ja tinha feito na receita 6!</p>
 </body>
 
 <script>
 
     let cervejas = []
 
-    //cs é um array de cervejas
     const carregarDiv = cs => {
         const div = document.getElementById("cervejasDiv")
-        const itensHtml = cs.map(({ name, brewery_type, city }) => `<div>${name} -- Tipo: ${brewery_type} -- Cidade: ${city}</div>`)
-        div.innerHTML = `${itensHtml.join("\n")}`
+        const itensHtml = cs.map(({ name, brewery_type, city }) => `<tr>
+            <td>${name}</td>
+            <td>${brewery_type}</td>
+            <td>${city}</td>
+        </tr>`)
+
+        div.innerHTML = `<table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Cidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${itensHtml.join("\n")}
+            </tbody>
+        </table>`
     }
 
     async function carregarCervejas() {
