@@ -4,230 +4,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DCT1109 - Programação Web | Portal de Receitas</title>
+    <title>DCT1109 - Programação Web</title>
     <style>
-        :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --card-border: #30363d;
-            --text-main: #c9d1d9;
-            --text-heading: #58a6ff;
-            --accent: #238636;
-            --accent-hover: #2ea043;
-            --badge-bg: #21262d;
-            --badge-text: #8b949e;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding: 40px 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 40px auto;
+            max-width: 800px;
+            padding: 0 20px;
+            color: #222;
+            line-height: 1.5;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
+        h1 {
+            border-bottom: 2px solid #222;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            font-size: 1.8rem;
         }
 
-        header {
-            text-align: center;
+        p.subtitulo {
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--card-border);
         }
 
-        header h1 {
-            color: #f0f6fc;
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px 12px;
+            text-align: left;
         }
 
-        header p {
-            color: #8b949e;
-            font-size: 1.1rem;
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+        tr:nth-child(even) {
+            background-color: #fafafa;
         }
 
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--text-heading);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-        }
-
-        .card h2 {
-            color: var(--text-heading);
-            font-size: 1.4rem;
-            margin-bottom: 8px;
-        }
-
-        .card p {
-            color: var(--text-main);
-            font-size: 0.95rem;
-            margin-bottom: 16px;
-            flex-grow: 1;
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 16px;
-        }
-
-        .tag {
-            background-color: var(--badge-bg);
-            color: var(--badge-text);
-            font-size: 0.75rem;
-            padding: 3px 8px;
-            border-radius: 12px;
-            border: 1px solid var(--card-border);
-        }
-
-        .btn {
-            display: inline-block;
-            text-align: center;
-            background-color: var(--accent);
-            color: #fff;
+        a {
+            color: #0366d6;
             text-decoration: none;
-            padding: 10px 16px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: background-color 0.2s ease;
+            font-weight: 500;
         }
 
-        .btn:hover {
-            background-color: var(--accent-hover);
+        a:hover {
+            text-decoration: underline;
         }
 
         footer {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid var(--card-border);
-            color: #8b949e;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
             font-size: 0.9rem;
-        }
-
-        footer a {
-            color: var(--text-heading);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
+            color: #666;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <header>
-            <h1>DCT1109 - Programação Web</h1>
-            <p>Repositório de Práticas e Receitas de Desenvolvimento Web</p>
-        </header>
+    <h1>DCT1109 - Programação Web</h1>
+    <p class="subtitulo">Portal de Acesso às Práticas e Receitas</p>
 
-        <main class="grid">
-            <!-- Receita 3 -->
-            <article class="card">
-                <div>
-                    <h2>Receita 3</h2>
-                    <p>Introdução à manipulação da árvore DOM e eventos no navegador.</p>
-                    <div class="tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">DOM</span>
-                        <span class="tag">Eventos</span>
-                    </div>
-                </div>
-                <a class="btn" href="receita%203/index.html">Acessar Receita 3</a>
-            </article>
+    <table>
+        <thead>
+            <tr>
+                <th>Receita</th>
+                <th>Descrição / Assunto</th>
+                <th>Acesso</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Receita 3</strong></td>
+                <td>Introdução ao DOM e eventos no navegador</td>
+                <td><a href="receita%203/index.html">Abrir Receita 3</a></td>
+            </tr>
+            <tr>
+                <td><strong>Receita 4</strong></td>
+                <td>Funções em JavaScript e manipulação de elementos</td>
+                <td><a href="Receita%204/index.html">Abrir Receita 4</a></td>
+            </tr>
+            <tr>
+                <td><strong>Receita 5</strong></td>
+                <td>Arrow functions e manipulação de arrays (map)</td>
+                <td><a href="Receita%205/index.html">Abrir Receita 5</a></td>
+            </tr>
+            <tr>
+                <td><strong>Receita 6</strong></td>
+                <td>Tabelas dinâmicas com parâmetros default</td>
+                <td><a href="Receita%206/index.html">Abrir Receita 6</a></td>
+            </tr>
+            <tr>
+                <td><strong>Receita 7</strong></td>
+                <td>Requisições assíncronas (fetch, async/await, try/catch e módulos .js)</td>
+                <td><a href="Receita%207/index.html">Abrir Receita 7</a></td>
+            </tr>
+        </tbody>
+    </table>
 
-            <!-- Receita 4 -->
-            <article class="card">
-                <div>
-                    <h2>Receita 4</h2>
-                    <p>Estruturação de funções em JavaScript, manipulação dinâmica e modularização.</p>
-                    <div class="tags">
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Funções</span>
-                        <span class="tag">DOM</span>
-                    </div>
-                </div>
-                <a class="btn" href="Receita%204/index.html">Acessar Receita 4</a>
-            </article>
-
-            <!-- Receita 5 -->
-            <article class="card">
-                <div>
-                    <h2>Receita 5</h2>
-                    <p>Uso de Arrow Functions, manipulação de arrays e geração declarativa de interface.</p>
-                    <div class="tags">
-                        <span class="tag">Arrow Functions</span>
-                        <span class="tag">Array.map()</span>
-                        <span class="tag">JSON</span>
-                    </div>
-                </div>
-                <a class="btn" href="Receita%205/index.html">Acessar Receita 5</a>
-            </article>
-
-            <!-- Receita 6 -->
-            <article class="card">
-                <div>
-                    <h2>Receita 6</h2>
-                    <p>Renderização de tabelas HTML com parâmetros genéricos e valores default para cabeçalhos e propriedades.</p>
-                    <div class="tags">
-                        <span class="tag">Tabelas</span>
-                        <span class="tag">Default Parameters</span>
-                        <span class="tag">CSS</span>
-                    </div>
-                </div>
-                <a class="btn" href="Receita%206/index.html">Acessar Receita 6</a>
-            </article>
-
-            <!-- Receita 7 -->
-            <article class="card">
-                <div>
-                    <h2>Receita 7</h2>
-                    <p>Consumo assíncrono de APIs externas com Fetch API, async/await, tratamento de erros via try/catch e modularização em arquivos .js.</p>
-                    <div class="tags">
-                        <span class="tag">Fetch API</span>
-                        <span class="tag">Async/Await</span>
-                        <span class="tag">Try/Catch</span>
-                        <span class="tag">Módulos JS</span>
-                    </div>
-                </div>
-                <a class="btn" href="Receita%207/index.html">Acessar Receita 7</a>
-            </article>
-        </main>
-
-        <footer>
-            <p>Desenvolvido por <strong>Jefferson Willian</strong> | Repositório no <a href="https://github.com/JefWill/DCT1109-PROGRAMACAO-WEB" target="_blank" rel="noopener">GitHub</a></p>
-        </footer>
-    </div>
+    <footer>
+        <p>Desenvolvido por <strong>Jefferson Willame</strong> | Repositório no <a
+                href="https://github.com/JefWill/DCT1109-PROGRAMACAO-WEB" target="_blank" rel="noopener">GitHub</a></p>
+    </footer>
 </body>
 
 </html>

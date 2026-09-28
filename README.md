@@ -45,5 +45,5 @@ Acesse a página principal com a navegação interativa de todas as receitas dir
 
 ## 👤 Autor
 
-- **Jefferson Willian**
+- **Jefferson Willame**
 - GitHub: [@JefWill](https://github.com/JefWill)
