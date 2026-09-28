@@ -31,6 +31,14 @@
             padding: 8px 16px;
             cursor: pointer;
         }
+
+        .mensagem-erro {
+            color: #d63031;
+            border: 2px dashed #d63031;
+            border-radius: 8px;
+            font-weight: bold;
+
+        }
     </style>
 </head>
 
@@ -41,76 +49,59 @@
     </div>
     <div id="cervejasDiv"></div>
     <p>nota: no exercicio 2 eu peguei o estilo que ja tinha feito na receita 6!</p>
+    <p>nota: no exercicio 4 deixei 50% de chance da url corromper e ai mostrar o erro do try catch</p>
 </body>
+
+<!-- Importação da função genérica do arquivo externo (Exercício 4) -->
+<script src="tabela.js"></script>
 
 <script>
 
     let cervejas = []
     let usuarios = []
 
-    const carregarDiv = cs => {
-        const div = document.getElementById("cervejasDiv")
-        const itensHtml = cs.map(({ name, brewery_type, city }) => `<tr>
-            <td>${name}</td>
-            <td>${brewery_type}</td>
-            <td>${city}</td>
-        </tr>`)
-
-        div.innerHTML = `<table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Tipo</th>
-                    <th>Cidade</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${itensHtml.join("\n")}
-            </tbody>
-        </table>`
-    }
-
-    const carregarTabelaUsuarios = users => {
-        const div = document.getElementById("cervejasDiv")
-        const itensHtml = users.map(({ name, username, email, phone }) => `<tr>
-            <td>${name}</td>
-            <td>${username}</td>
-            <td>${email}</td>
-            <td>${phone}</td>
-        </tr>`)
-
-        div.innerHTML = `<table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Username</th>
-                    <th>E-mail</th>
-                    <th>Telefone</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${itensHtml.join("\n")}
-            </tbody>
-        </table>`
-    }
-
     async function carregarCervejas() {
         try {
-            let res = await fetch("https://api.openbrewerydb.org/v1/breweries?per_page=5")
+            // 50% de chance de corromper a URL com caractere errado, forçando o erro real de rede do fetch
+            const url = Math.random() < 0.5
+                ? "https://api.openbrewerydb.org/v1/breweries?per_page=5"
+                : "https://api.openbrewerydb.org.ERRADO/v1/breweries?per_page=5"
+
+            let res = await fetch(url)
             cervejas = await res.json()
-            carregarDiv(cervejas)
+            // Usa os valores padrão da função genérica
+            carregarTabelaGenerica(cervejas)
         } catch (err) {
-            document.getElementById("cervejasDiv").innerHTML = "Fudeu..."
+            document.getElementById("cervejasDiv").innerHTML = `
+                <div class="mensagem-erro">
+                    ferroulhes (demonstrando o try catch) XD
+                </div>
+            `
         }
     }
 
     async function carregarUsuarios() {
         try {
-            let res = await fetch("https://jsonplaceholder.typicode.com/users")
+            // 50% de chance de corromper a URL com caractere errado, forçando o erro real de rede do fetch
+            const url = Math.random() < 0.5
+                ? "https://jsonplaceholder.typicode.com/users"
+                : "https://jsonplaceholder.typicode.com.ERRADO/users"
+
+            let res = await fetch(url)
             usuarios = await res.json()
-            carregarTabelaUsuarios(usuarios)
+            // Usa a mesma função genérica passando colunas e propriedades de usuários
+            carregarTabelaGenerica(
+                usuarios,
+                "cervejasDiv",
+                ["Nome", "Username", "E-mail", "Telefone"],
+                ["name", "username", "email", "phone"]
+            )
         } catch (err) {
-            document.getElementById("cervejasDiv").innerHTML = "Erro ao carregar usuários..."
+            document.getElementById("cervejasDiv").innerHTML = `
+                <div class="mensagem-erro">
+                    ferroulhes (demonstrando o try catch) XD
+                </div>
+            `
         }
     }
 
