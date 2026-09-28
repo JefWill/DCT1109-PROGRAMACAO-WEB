@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table,
+        th,
+        td {
+            font-family: 'comic sans ms', sans-serif;
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+
+        table {
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        thead {
+            background-color: #333;
+            color: #fff;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        button {
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+
+        .mensagem-erro {
+            color: #d63031;
+            border: 2px dashed #d63031;
+            border-radius: 8px;
+            font-weight: bold;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <button id="botaoCarregar">Carregar Cervejarias</button>
+        <button id="botaoCarregarUsuarios">Carregar Usuários (JSONPlaceholder)</button>
+    </div>
+    <div id="cervejasDiv"></div>
+    <p>nota: no exercicio 2 eu peguei o estilo que ja tinha feito na receita 6!</p>
+    <p>nota: no exercicio 4 deixei 50% de chance da url corromper e ai mostrar o erro do try catch</p>
+</body>
+
+<!-- Importação da função genérica do arquivo externo (Exercício 4) -->
+<script src="tabela.js"></script>
+
+<script>
+
+    let cervejas = []
+    let usuarios = []
+
+    async function carregarCervejas() {
+        try {
+            // 50% de chance de corromper a URL com caractere errado, forçando o erro real de rede do fetch
+            const url = Math.random() < 0.5
+                ? "https://api.openbrewerydb.org/v1/breweries?per_page=5"
+                : "https://api.openbrewerydb.org.ERRADO/v1/breweries?per_page=5"
+
+            let res = await fetch(url)
+            cervejas = await res.json()
+            // Usa os valores padrão da função genérica
+            carregarTabelaGenerica(cervejas)
+        } catch (err) {
+            document.getElementById("cervejasDiv").innerHTML = `
+                <div class="mensagem-erro">
+                    ferroulhes (demonstrando o try catch) XD
+                </div>
+            `
+        }
+    }
+
+    async function carregarUsuarios() {
+        try {
+            // 50% de chance de corromper a URL com caractere errado, forçando o erro real de rede do fetch
+            const url = Math.random() < 0.5
+                ? "https://jsonplaceholder.typicode.com/users"
+                : "https://jsonplaceholder.typicode.com.ERRADO/users"
+
+            let res = await fetch(url)
+            usuarios = await res.json()
+            // Usa a mesma função genérica passando colunas e propriedades de usuários
+            carregarTabelaGenerica(
+                usuarios,
+                "cervejasDiv",
+                ["Nome", "Username", "E-mail", "Telefone"],
+                ["name", "username", "email", "phone"]
+            )
+        } catch (err) {
+            document.getElementById("cervejasDiv").innerHTML = `
+                <div class="mensagem-erro">
+                    ferroulhes (demonstrando o try catch) XD
+                </div>
+            `
+        }
+    }
+
+    let botao = document.getElementById("botaoCarregar")
+    botao.addEventListener("click", () => carregarCervejas())
+
+    let botaoUsuarios = document.getElementById("botaoCarregarUsuarios")
+    botaoUsuarios.addEventListener("click", () => carregarUsuarios())
+
+</script>
+
+</html>
