@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Receita React #2 - Classes</title>
+   <style>
+      * { box-sizing: border-box; }
+      body {
+         margin: 0;
+         padding: 32px 16px;
+         background: #f4f6f8;
+         color: #25313c;
+         font-family: "Segoe UI", Tahoma, sans-serif;
+      }
+      .pagina { max-width: 760px; margin: 0 auto; }
+      .cabecalho, .cartao, .rodape {
+         padding: 22px 26px;
+         margin-bottom: 18px;
+         background: #fff;
+         border: 1px solid #e0e6eb;
+         border-radius: 12px;
+         box-shadow: 0 4px 16px rgba(28, 45, 60, .06);
+      }
+      .cabecalho p {
+         margin: 0 0 6px;
+         color: #2878a8;
+         font-size: .85rem;
+         font-weight: 700;
+         letter-spacing: .08em;
+         text-transform: uppercase;
+      }
+      .cabecalho h2 { margin: 0; color: #263b4d; }
+      .descricao { color: #5b6872; line-height: 1.6; }
+      .cartao h1 { margin: 0 0 18px; font-size: 1.45rem; }
+      .tabela-scroll { overflow-x: auto; }
+      table { width: 100%; border-collapse: collapse; background: #fff; }
+      thead { background: #294c60; color: #fff; }
+      th, td { padding: 12px 15px; text-align: left; }
+      tbody tr { border-bottom: 1px solid #e3e9ed; }
+      tbody tr:nth-child(even) { background: #f7fafb; }
+      tbody tr:hover { background: #eaf3f7; }
+      .rodape { color: #6b7881; font-size: .9rem; }
+      @media (max-width: 520px) {
+         body { padding: 20px 12px; }
+         .cabecalho, .cartao, .rodape { padding: 18px; }
+         th, td { padding: 10px; }
+      }
+   </style>
+</head>
+<body>
+   <div id="app"></div>
+
+   <script src="libs/react.js"></script>
+   <script src="libs/react-dom.js"></script>
+   <script src="libs/babel.js"></script>
+
+   <script type="text/babel">
+      const bebidas = [
+         { nome: "Havana", marca: "Engenho Anísio Santiago" },
+         { nome: "Ypióca", marca: "Ypióca Agroindustrial" },
+         { nome: "Seleta", marca: "Seleta e Boazinha" }
+      ];
+
+      class Cabecalho extends React.Component {
+         render() {
+            return (
+               <header className="cabecalho">
+                  <p>Receita React #2</p>
+                  <h2>Componentes de classe</h2>
+               </header>
+            );
+         }
+      }
+
+      class Descricao extends React.Component {
+         render() {
+            return (
+               <p className="descricao">
+                  Cada componente estende React.Component e devolve sua interface pelo método render().
+               </p>
+            );
+         }
+      }
+
+      class TabelaBebidas extends React.Component {
+         render() {
+            return (
+               <section className="cartao">
+                  <h1>{this.props.titulo}</h1>
+                  <div className="tabela-scroll">
+                     <table id="tabela">
+                        <thead>
+                           <tr><th>Nome</th><th>Marca</th></tr>
+                        </thead>
+                        <tbody>
+                           {bebidas.map((bebida, indice) => (
+                              <tr key={indice}>
+                                 <td>{bebida.nome}</td>
+                                 <td>{bebida.marca}</td>
+                              </tr>
+                           ))}
+                        </tbody>
+                     </table>
+                  </div>
+               </section>
+            );
+         }
+      }
+
+      class Rodape extends React.Component {
+         render() {
+            return (
+               <footer className="rodape">
+                  O título desta tabela vem da propriedade <code>titulo</code> do componente.
+               </footer>
+            );
+         }
+      }
+
+      class App extends React.Component {
+         render() {
+            return (
+               <main className="pagina">
+                  <Cabecalho />
+                  <Descricao />
+                  <TabelaBebidas titulo="Tabela de Cana" />
+                  <Rodape />
+               </main>
+            );
+         }
+      }
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+   </script>
+</body>
+</html>
