@@ -23,6 +23,7 @@ Acesse a página principal com a navegação interativa de todas as receitas dir
 | **Receita 6**        | Construção de tabelas dinâmicas com parâmetros default para ID, cabeçalhos e propriedades                                        | [Receita 6/](./Receita%206/index.html) |
 | **Receita 7**        | Requisições assíncronas com `fetch`, `async/await`, tratamento de erros com `try/catch` e modularização em arquivo `.js` externo | [Receita 7/](./Receita%207/index.html) |
 | **Receita 8**        | Requisições assíncronas com `Promise` (`.then`, `.catch`), estado de carregamento e funções modulares                             | [Receita 8/](./Receita%208/index.html) |
+| **Receita 9**        | Criação de interface e tabela com React (`React.createElement`)                                                                    | [Receita 9/](./Receita%209/react_example/index.html) |
 
 ---
 
@@ -45,6 +46,9 @@ Acesse a página principal com a navegação interativa de todas as receitas dir
 ### Receita 8
 - Introdução a **Promises** em JavaScript (`fetch`, `.then()`, `.catch()`).
 - Estudo do comportamento assíncrono não bloqueante e tratamento de erros.
+
+### Receita 9
+- Construção de uma tabela HTML usando React e `React.createElement`.
 
 ---
 
