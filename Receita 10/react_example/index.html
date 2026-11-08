@@ -7,14 +7,18 @@
 </head>
 
 <body>
-
+   <button id="botaoCarregar">Carregar Tabela</button>
    <div id="app"></div>
 
    <script src="libs/react.js"></script>
    <script src="libs/react-dom.js"></script>
    <script src="libs/babel.js"></script>
-
    <script type="text/babel">
+      const cachacas = [
+         { nome: "Havana", marca: "Engenho Anísio Santiago" },
+         { nome: "Ypióca", marca: "Ypióca Agroindustrial" },
+         { nome: "Seleta", marca: "Seleta e Boazinha" }
+      ];
       function Cabecario() {
          return (
             <h1>Minha tabela de bebidas</h1>
@@ -30,22 +34,27 @@
                   </tr>
                </thead>
                <tbody>
-                  <tr>
-                     <td>Havana</td>
-                     <td>Engenho Anísio Santiago</td>
-                  </tr>
+                  {cachacas.map((c, index) => (
+                     <tr key={index}>
+                        <td>{c.nome}</td>
+                        <td>{c.marca}</td>
+                     </tr>
+                  ))}
                </tbody>
             </table>
          );
       }
 
-      ReactDOM.render(
-         <div> <Cabecario />
-            <TabelaBebidas />
-         </div>
-         ,
-         document.getElementById("app"));
-
+      function carregar() {
+         ReactDOM.render(
+            <div>
+               <Cabecario />
+               <TabelaBebidas />
+            </div>,
+            document.getElementById("app")
+         );
+      }
+      document.getElementById("botaoCarregar").addEventListener("click", carregar);
    </script>
 
 </body>
