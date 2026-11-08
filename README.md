@@ -24,6 +24,7 @@ Acesse a página principal com a navegação interativa de todas as receitas dir
 | **Receita 7**        | Requisições assíncronas com `fetch`, `async/await`, tratamento de erros com `try/catch` e modularização em arquivo `.js` externo | [Receita 7/](./Receita%207/index.html) |
 | **Receita 8**        | Requisições assíncronas com `Promise` (`.then`, `.catch`), estado de carregamento e funções modulares                             | [Receita 8/](./Receita%208/index.html) |
 | **Receita 9**        | Criação de interface e tabela com React (`React.createElement`)                                                                    | [Receita 9/](./Receita%209/react_example/index.html) |
+| **Receita 10**       | Introdução ao JSX e componentes funcionais React; tabela de cachaças exibida ao clicar no botão                             | [Receita 10/](./Receita%2010/react_example/index.html) |
 
 ---
 
@@ -49,6 +50,10 @@ Acesse a página principal com a navegação interativa de todas as receitas dir
 
 ### Receita 9
 - Construção de uma tabela HTML usando React e `React.createElement`.
+
+### Receita 10
+- Uso de JSX com Babel e componentes funcionais React.
+- Tabela criada a partir de um array de bebidas e renderizada após o clique no botão.
 
 ---
 
