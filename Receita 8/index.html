@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receita 8 - Promessas (Promise)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #2d3436;
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #0984e3;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .painel-botoes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            background-color: #0984e3;
+            color: #ffffff;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #0767b1;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button#botaoCarregarUsuarios {
+            background-color: #00b894;
+        }
+
+        button#botaoCarregarUsuarios:hover {
+            background-color: #009879;
+        }
+
+        #cervejasDiv {
+            margin-top: 20px;
+            min-height: 80px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-top: 10px;
+            border: none;
+        }
+
+        thead {
+            background-color: #2d3436;
+            color: #ffffff;
+        }
+
+        th {
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #dfe6e9;
+            font-size: 0.95rem;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fbfd;
+        }
+
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .status-carregando {
+            padding: 14px 18px;
+            background-color: #e8f4fd;
+            border-left: 5px solid #0984e3;
+            border-radius: 4px;
+            color: #0984e3;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .mensagem-erro {
+            padding: 14px 18px;
+            background-color: #fdedec;
+            border-left: 5px solid #d63031;
+            border-radius: 4px;
+            color: #d63031;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .notas-container {
+            margin-top: 35px;
+            padding: 15px 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+            color: #636e72;
+        }
+
+        .notas-container p {
+            margin: 6px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Receita 8 - Promessas em JavaScript</h1>
+
+    <div class="painel-botoes">
+        <button id="botaoCarregar">Carregar Cervejarias</button>
+        <button id="botaoCarregarUsuarios">Carregar Usuários (JSONPlaceholder)</button>
+    </div>
+
+    <div id="cervejasDiv"></div>
+
+    <div class="notas-container">
+        <p><strong>Nota (Exercício 1):</strong> Uso de <code>Promise</code> (<code>.then</code> / <code>.catch</code>) e exibição de mais propriedades (Estado e País).</p>
+        <p><strong>Nota (Exercício 2):</strong> Página bonitificada com fontes modernas, cartões de status e erro, botões com hover e tabela estilizada.</p>
+        <p><strong>Nota (Exercícios 3 e 4):</strong> Consumo de itens diferentes (Usuários via JSONPlaceholder) através de função genérica externa (<code>tabela.js</code>) e 100% com <code>Promise</code> (<code>.then</code> / <code>.catch</code>).</p>
+        <p><strong>Nota:</strong> 50% de chance das URLs corromperem para demonstrar o tratamento de falhas no <code>.catch</code>.</p>
+    </div>
+</body>
+
+<!-- Importação da função genérica do arquivo externo (Exercício 4) -->
+<script src="tabela.js"></script>
+
+<script>
+
+    let cervejas = []
+    let usuarios = []
+
+    // Exercício 1 da Receita 8: usar Promise (.then / .catch) e exibir outras propriedades das cervejas
+    function carregarCervejas() {
+        // 50% de chance de corromper a URL com caractere errado, forçando o erro real de rede do fetch
+        const url = Math.random() < 0.5
+            ? "https://api.openbrewerydb.org/v1/breweries?per_page=5"
+            : "https://api.openbrewerydb.org.ERRADO/v1/breweries?per_page=5"
+
+        fetch(url)
+            .then(res => {
+                if (!res.ok) throw new Error(`Erro HTTP: ${res.status}`)
+                return res.json()
+            })
+            .then(json => {
+                cervejas = json
+                // Exibindo outras propriedades além de Nome, Tipo e Cidade (adicionando Estado e País)
+                carregarTabelaGenerica(
+                    cervejas,
+                    "cervejasDiv",
+                    ["Nome", "Tipo", "Cidade", "Estado", "País"],
+                    ["name", "brewery_type", "city", "state_province", "country"]
+                )
+            })
+            .catch(err => {
+                document.getElementById("cervejasDiv").innerHTML = `
+                    <div class="mensagem-erro">
+                        ⚠️ ferroulhes (demonstrando o catch da promise) XD
+                    </div>
+                `
+            })
+
+        // Mensagem imediata enquanto a Promise está sendo processada em segundo plano
+        document.getElementById("cervejasDiv").innerHTML = `
+            <div class="status-carregando">
+                Fazendo requisição... ⏳
+            </div>
+        `
+    }
+
+    // Exercícios 3 e 4 da Receita 8: carregar outro item (usuários) via Promise (.then / .catch) e função genérica externa
+    function carregarUsuarios() {
+        // 50% de chance de corromper a URL com caractere errado, forçando o erro real de rede do fetch
+        const url = Math.random() < 0.5
+            ? "https://jsonplaceholder.typicode.com/users"
+            : "https://jsonplaceholder.typicode.com.ERRADO/users"
+
+        fetch(url)
+            .then(res => {
+                if (!res.ok) throw new Error(`Erro HTTP: ${res.status}`)
+                return res.json()
+            })
+            .then(json => {
+                usuarios = json
+                // Usa a mesma função genérica passando colunas e propriedades de usuários
+                carregarTabelaGenerica(
+                    usuarios,
+                    "cervejasDiv",
+                    ["Nome", "Username", "E-mail", "Telefone"],
+                    ["name", "username", "email", "phone"]
+                )
+            })
+            .catch(err => {
+                document.getElementById("cervejasDiv").innerHTML = `
+                    <div class="mensagem-erro">
+                        ⚠️ ferroulhes (demonstrando o catch da promise em usuários) XD
+                    </div>
+                `
+            })
+
+        // Mensagem imediata enquanto a Promise está sendo processada em segundo plano
+        document.getElementById("cervejasDiv").innerHTML = `
+            <div class="status-carregando">
+                Fazendo requisição de usuários... ⏳
+            </div>
+        `
+    }
+
+    let botao = document.getElementById("botaoCarregar")
+    botao.addEventListener("click", () => carregarCervejas())
+
+    let botaoUsuarios = document.getElementById("botaoCarregarUsuarios")
+    botaoUsuarios.addEventListener("click", () => carregarUsuarios())
+
+</script>
+
+</html>
