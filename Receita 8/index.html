@@ -153,7 +153,8 @@
     <div class="notas-container">
         <p><strong>Nota (Exercício 1):</strong> Uso de <code>Promise</code> (<code>.then</code> / <code>.catch</code>) e exibição de mais propriedades (Estado e País).</p>
         <p><strong>Nota (Exercício 2):</strong> Página bonitificada com fontes modernas, cartões de status e erro, botões com hover e tabela estilizada.</p>
-        <p><strong>Nota (Exercício 4):</strong> 50% de chance da URL corromper para demonstrar o tratamento de falhas no <code>.catch</code>.</p>
+        <p><strong>Nota (Exercícios 3 e 4):</strong> Consumo de itens diferentes (Usuários via JSONPlaceholder) através de função genérica externa (<code>tabela.js</code>) e 100% com <code>Promise</code> (<code>.then</code> / <code>.catch</code>).</p>
+        <p><strong>Nota:</strong> 50% de chance das URLs corromperem para demonstrar o tratamento de falhas no <code>.catch</code>.</p>
     </div>
 </body>
 
@@ -203,29 +204,42 @@
         `
     }
 
-    async function carregarUsuarios() {
-        try {
-            // 50% de chance de corromper a URL com caractere errado, forçando o erro real de rede do fetch
-            const url = Math.random() < 0.5
-                ? "https://jsonplaceholder.typicode.com/users"
-                : "https://jsonplaceholder.typicode.com.ERRADO/users"
+    // Exercícios 3 e 4 da Receita 8: carregar outro item (usuários) via Promise (.then / .catch) e função genérica externa
+    function carregarUsuarios() {
+        // 50% de chance de corromper a URL com caractere errado, forçando o erro real de rede do fetch
+        const url = Math.random() < 0.5
+            ? "https://jsonplaceholder.typicode.com/users"
+            : "https://jsonplaceholder.typicode.com.ERRADO/users"
 
-            let res = await fetch(url)
-            usuarios = await res.json()
-            // Usa a mesma função genérica passando colunas e propriedades de usuários
-            carregarTabelaGenerica(
-                usuarios,
-                "cervejasDiv",
-                ["Nome", "Username", "E-mail", "Telefone"],
-                ["name", "username", "email", "phone"]
-            )
-        } catch (err) {
-            document.getElementById("cervejasDiv").innerHTML = `
-                <div class="mensagem-erro">
-                    ferroulhes (demonstrando o try catch) XD
-                </div>
-            `
-        }
+        fetch(url)
+            .then(res => {
+                if (!res.ok) throw new Error(`Erro HTTP: ${res.status}`)
+                return res.json()
+            })
+            .then(json => {
+                usuarios = json
+                // Usa a mesma função genérica passando colunas e propriedades de usuários
+                carregarTabelaGenerica(
+                    usuarios,
+                    "cervejasDiv",
+                    ["Nome", "Username", "E-mail", "Telefone"],
+                    ["name", "username", "email", "phone"]
+                )
+            })
+            .catch(err => {
+                document.getElementById("cervejasDiv").innerHTML = `
+                    <div class="mensagem-erro">
+                        ⚠️ ferroulhes (demonstrando o catch da promise em usuários) XD
+                    </div>
+                `
+            })
+
+        // Mensagem imediata enquanto a Promise está sendo processada em segundo plano
+        document.getElementById("cervejasDiv").innerHTML = `
+            <div class="status-carregando">
+                Fazendo requisição de usuários... ⏳
+            </div>
+        `
     }
 
     let botao = document.getElementById("botaoCarregar")
